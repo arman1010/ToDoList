@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="cont_principal">
+    <div class="cont_centrar">
+
+        <div class="cont_todo_list_top">
+            <div class="cont_titulo_cont">
+                <h3>THINGS TO DO</h3>
+            </div>
+            <div class="cont_add_titulo_cont"><a href="/admin" class="logout">Back</a>
+            </div>
+
+        </div>
+                <div class="cont_crear_new">
+                    <table class="table">
+                        <form action="/todo/add" method="post" enctype="multipart/form-data" th:object="${toDo}">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="input_title_desc" th:field="*{name}"/>
+                                    <!-- End td 1 -->
+                                </td>
+                                <td>
+                                    <input type="text" class="input_title_desc" th:field="*{email}"/>
+
+                                    <!-- End td 2 -->
+                                </td>
+                                <td>
+                                    <select name="" class="input_description_title" id="date_select" th:field="*{toDoStatus}">
+                                        <option th:value="${status}" th:each="status:${toDoStatuses}"
+                                                th:text="${status}"></option>
+                                    </select>
+                                    <!-- End td 3 -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="titl_description">Image</th>
+                            </tr>
+                            <tr>
+
+                                <td colspan="3">
+                                    <img th:src="@{/getImage(picUrl=${toDo.picture})}">
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td colspan="3">
+                                    <input type="file" class="input_description" name="img"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="titl_description">Description</th>
+                            </tr>
+                            <tr>
+
+                                <td colspan="3">
+                                    <textarea type="text" class="input_description textarea_desc" required
+                                              th:field="*{text}"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button class="btn_add_fin" onclick="add_to_list()">Edit</button>
+                                </td>
+                            </tr>
+                            <input type="hidden" th:value="${toDo.id}" name="id">
+                            <input type="hidden" th:value="${toDo.picture}" name="picture">
+                        </form>
+                    </table>
+                    <!--   End cont_crear_new  -->
+                </div>
+        <!--   End cont_central  -->
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
